@@ -14,8 +14,8 @@ let score1 = 0
 let textS
 let textS0
 let ballyV
-platformwidth = 60
-num = Game.rnd.integerInRange(0, 1)
+let platformwidth = 60
+let num = Game.rnd.integerInRange(0, 1)
 function create() {
     textS = Game.add.text(Game.width-Game.width/8, 120, "Red Team\nScore: 0", { font: "65px Arial", fill: "#fff"})
     textS0 = Game.add.text(Game.width/8, 120, "Beige Team\nScore: 0", { font: "65px Arial", fill: "#fff"})
@@ -46,7 +46,8 @@ function create() {
     platform.body.immovable = true;
     platform2.body.immovable = true;
 }
-
+let count = 1
+let dead = 0
 function update(){
     Game.physics.arcade.collide(ball, platform);
     Game.physics.arcade.collide(ball, platform2);
@@ -54,9 +55,26 @@ function update(){
     textS0.text = "Beige Team\nScore: " + score1
     if(ball.x < 512/8+1){
         score0++
+        ball.x = Game.width/2
+        ball.y = Game.height/2
+        platform.y = Game.height/2
+        platform2.y = Game.height/2
+        ball.body.velocity.x = 0
+        dead = 1
     }else if(ball.x > Game.width - 512/8-1){
         score1++
+        ball.x = Game.width/2
+        ball.y = Game.height/2
+        platform.y = Game.height/2
+        platform2.y = Game.height/2
+        ball.body.velocity.x = 0
+        dead = 1
     }
+    if(!(count%400) && dead == 1){
+        num = Game.rnd.integerInRange(0, 1)
+        dead = 0
+    }
+    count++
     if(num > 0.5){
         ball.body.velocity.x = 500
         num = 0.5
@@ -98,3 +116,4 @@ function update(){
     }
 
 }
+
