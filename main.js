@@ -16,6 +16,7 @@ let textS0
 let ballyV
 let platformwidth = 60
 let num = Game.rnd.integerInRange(0, 1)
+let bg
 function create() {
     textS = Game.add.text(Game.width-Game.width/8, 120, "Red Team\nScore: 0", { font: "65px Arial", fill: "#fff"})
     textS0 = Game.add.text(Game.width/8, 120, "Beige Team\nScore: 0", { font: "65px Arial", fill: "#fff"})
